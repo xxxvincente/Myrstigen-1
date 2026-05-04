@@ -1,152 +1,247 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Slutpriser Järna - Bostadsförmedling</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Slutpriser Järna - Bostadsförmedling</title>
+<script src="https://cdn.tailwindcss.com"></script>
 
-    <script src="https://cdn.tailwindcss.com"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+:root {
+    --sf-black: #000000; /* SF Original Grön */
+    --sf-blue: #0066ff;
+    --sf-text: #1a1a1a;
+    --sf-gray: #666666;
+}
 
-        :root {
-            --sf-green: #004732;
-            --sf-text: #1a1a1a;
-            --sf-gray: #666666;
-        }
+body {
+    font-family: 'Inter', sans-serif;
+    color: var(--sf-text);
+    background-color: #fff;
+    -webkit-font-smoothing: antialiased;
+}
 
-        body {
-            font-family: 'Inter', sans-serif;
-            color: var(--sf-text);
-            background-color: #fff;
-            -webkit-font-smoothing: antialiased;
-        }
+.sf-green { color: var(--sf-black); }
+.bg-sf-green { background-color: var(--sf-black); }
 
-        .sf-green { color: var(--sf-green); }
-        .bg-sf-green { background-color: var(--sf-green); }
+/* FIX: saknades */
+.bg-sf-black { background-color: var(--sf-black); }
 
-        .sf-card {
-            border: 1px solid #e5e5e5;
-            transition: border-color 0.2s ease, box-shadow 0.2s ease;
-        }
+/* Specifik skugga och border som SF använder */
+.sf-card {
+    border: 1px solid #e5e5e5;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.sf-card:hover {
+    border-color: transparent;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+}
 
-        .sf-card:hover {
-            border-color: transparent;
-            box-shadow: 0 12px 30px rgba(0,0,0,0.08);
-        }
+.breadcrumb-text {
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+}
 
-        .label-caps {
-            font-size: 10px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: #999;
-        }
-    </style>
+.label-caps {
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #999;
+}
+</style>
 </head>
 
 <body>
 
-<!-- NAVIGATION (FIXAD SF-LAYOUT) -->
+<!-- NAVIGATION -->
 <nav class="border-b sticky top-0 bg-white z-[100]">
-  <div class="max-w-[1200px] mx-auto px-4 h-20 flex items-center">
+<div class="max-w-[1200px] mx-auto px-4 h-20 flex items-center justify-between">
 
-    <!-- LOGGA (VÄNSTER) -->
-    <div class="flex items-center">
-      <img 
-        src="https://fkexternalwebsmediaprod.blob.core.windows.net/cache/4/e/9/b/9/c/4e9b9c318194176dc8cbb37ca7c258393b2d0132.jpg"
-        class="h-10 w-auto cursor-pointer"
-        onclick="showList()"
-        alt="Logga"
-      >
-    </div>
+<!-- Vänster: ENDAST logga -->
+<div class="cursor-pointer" onclick="showList()">
+<img src="https://fkexternalwebsmediaprod.blob.core.windows.net/cache/4/e/9/b/9/c/4e9b9c318194176dc8cbb37ca7c258393b2d0132.jpg"
+alt="Logga" class="w-[370px] h-[167px]">
+</div>
 
-    <!-- MENY (CENTER) -->
-    <div class="flex-1 flex justify-center">
-      <div class="hidden md:flex space-x-10">
-        <a href="#" class="text-[13px] font-bold uppercase tracking-widest hover:text-[#004732]">Köpa</a>
-        <a href="#" class="text-[13px] font-bold uppercase tracking-widest hover:text-[#004732]">Sälja</a>
-        <a href="#" class="text-[13px] font-bold uppercase tracking-widest hover:text-[#004732]">Värdera</a>
-      </div>
-    </div>
+<!-- Mitten: meny -->
+<div class="hidden md:flex space-x-10">
+<a href="#" class="text-[13px] font-bold uppercase tracking-widest hover:text-black">Köpa</a>
+<a href="#" class="text-[13px] font-bold uppercase tracking-widest hover:text-black">Sälja</a>
+<a href="#" class="text-[13px] font-bold uppercase tracking-widest hover:text-black">Värdera</a>
+</div>
 
-    <!-- KNAPP (HÖGER) -->
-    <div>
-      <button class="bg-[#004732] text-white px-8 py-3 rounded-full text-[12px] font-bold uppercase tracking-wider hover:opacity-90 transition">
-        Logga in
-      </button>
-    </div>
+<!-- Höger: knapp -->
+<button class="bg-sf-black text-white px-8 py-3 rounded-full text-[12px] font-bold uppercase tracking-wider">
+Logga in
+</button>
 
-  </div>
+</div>
 </nav>
 
 <!-- LISTVY -->
 <div id="listView" class="max-w-[1200px] mx-auto px-4 py-12">
-    <div class="mb-10">
-        <nav class="label-caps text-gray-400 mb-4">Sverige / Stockholm / Södertälje / Järna</nav>
-        <h1 class="text-[40px] font-extrabold">Slutpriser i Järna</h1>
-        <p class="text-gray-500 text-lg mt-2">
-            Här ser du de senaste försäljningarna av villor, lägenheter och radhus.
-        </p>
-    </div>
+<div class="mb-10">
+<nav class="breadcrumb-text text-gray-400 mb-4 uppercase">
+Sverige / Stockholm / Södertälje / Järna
+</nav>
 
-    <div id="propertyList" class="space-y-5"></div>
+<h1 class="text-[40px] font-extrabold leading-tight tracking-tight">
+Slutpriser i Järna
+</h1>
+
+<p class="text-gray-500 text-lg mt-2">
+Här ser du de senaste försäljningarna av villor, lägenheter och radhus.
+</p>
+</div>
+
+<div id="propertyList" class="space-y-5"></div>
 </div>
 
 <!-- DETALJVY -->
-<div id="detailView" class="hidden">
+<div id="detailView" class="hidden animate-in fade-in duration-500">
 
-    <div class="max-w-[1200px] mx-auto px-4 py-12">
-        <button onclick="showList()" class="mb-8 font-bold uppercase text-sm tracking-widest">
-            ← Tillbaka
-        </button>
+<div class="flex gap-1 h-[400px] md:h-[600px] bg-gray-100 overflow-hidden">
 
-        <h1 id="detailAddress" class="text-4xl font-extrabold mb-4"></h1>
-        <p id="detailPrice" class="text-2xl font-bold sf-green mb-6"></p>
+<div class="w-full md:w-1/2 h-full">
+<img id="detailImg1" src="" class="w-full h-full object-cover hover:opacity-95 transition">
+</div>
 
-        <p id="detailDesc" class="text-lg text-gray-700"></p>
-    </div>
+<div class="hidden md:flex w-1/2 flex-col gap-1">
+
+<div class="h-1/2 w-full">
+<img id="detailImg2" src="" class="w-full h-full object-cover">
+</div>
+
+<div class="h-1/2 w-full relative">
+<img id="detailImg3" src="" class="w-full h-full object-cover">
+
+<div class="absolute inset-0 bg-black/20 flex items-center justify-center">
+<button class="bg-white text-black px-6 py-2 rounded-full font-bold text-sm">
+Visa alla bilder
+</button>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class="max-w-[1200px] mx-auto px-4 py-12">
+
+<button onclick="showList()" class="flex items-center text-[12px] font-extrabold uppercase tracking-widest mb-10 hover:opacity-60">
+<svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="3" d="M15 19l-7-7 7-7"/></svg>
+Tillbaka till sökresultat
+</button>
+
+<div class="flex flex-col lg:flex-row gap-16">
+
+<div class="lg:w-[65%]">
+
+<div class="mb-12">
+<span id="detailAreaTop" class="label-caps"></span>
+<h1 id="detailAddress" class="text-[48px] font-extrabold leading-none mt-2 tracking-tighter"></h1>
+
+<div class="grid grid-cols-2 md:grid-cols-4 gap-8 mt-12 pb-12 border-b">
+<div><p class="label-caps mb-1">Slutpris</p><p id="detailPrice" class="text-3xl font-extrabold sf-green"></p></div>
+<div><p class="label-caps mb-1">Boarea</p><p id="detailSize" class="text-3xl font-extrabold"></p></div>
+<div><p class="label-caps mb-1">Rum</p><p id="detailRooms" class="text-3xl font-extrabold"></p></div>
+<div><p class="label-caps mb-1">Tomt</p><p id="detailLot" class="text-3xl font-extrabold"></p></div>
+</div>
+</div>
+
+<div class="mb-16">
+<h2 class="text-2xl font-extrabold mb-6">Beskrivning</h2>
+<p id="detailDesc" class="text-[#444] text-xl leading-relaxed font-normal"></p>
+</div>
+
+<div class="mb-20">
+<h2 class="text-2xl font-extrabold mb-8">Fakta om bostaden</h2>
+<div id="factTable" class="grid grid-cols-1 md:grid-cols-2 border-t border-gray-200"></div>
+</div>
 
 </div>
 
+<div class="lg:w-[35%]">
+
+<div class="sticky top-32">
+
+<div class="bg-[#f8f7f5] p-10 rounded-2xl">
+<h3 class="text-xl font-extrabold mb-6">Värdera din egen bostad?</h3>
+<p class="text-gray-600 mb-8 leading-relaxed">Ska du sälja? Våra mäklare i Järna har stenkoll på priserna just nu.</p>
+
+<button class="w-full bg-sf-green text-white py-5 rounded-full font-extrabold tracking-widest text-[12px] uppercase mb-4 shadow-xl shadow-green-900/20">
+Boka fri värdering
+</button>
+</div>
+
+<div class="mt-8 flex items-center p-6 border border-gray-100 rounded-2xl">
+<img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=150&h=150" class="w-16 h-16 rounded-full object-cover">
+<div class="ml-4">
+<p class="font-extrabold">Maria Fastighetsson</p>
+<p class="text-sm text-gray-500 font-medium">Fastighetsmäklare Järna</p>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
 <script>
+
 const properties = [
-    { id: 1, address: "Kallfors Höjder 14", area: "Järna", price: "7 250 000 kr", rooms: "6 rum", size: "165 m²", lot: "1240 m²", desc: "Modern villa med utsikt." },
-    { id: 2, address: "Storgatan 12A", area: "Järna", price: "2 150 000 kr", rooms: "3 rum", size: "78 m²", lot: "-", desc: "Centralt läge." }
+
+{ id: 1, address: "Kallfors Höjder 14", area: "Järna - Kallfors", price: "7 250 000 kr", trend: "+12%", rooms: "6 rum", size: "165 m²", lot: "1 240 m²", soldDate: "2024-05-01", isVarudeklarerat: true, clickable: true,
+desc: "Drömmer du om ett modernt och bekymmersfritt boende? På exklusiva Kallfors Höjder hittar vi denna arkitektritade villa med slående utsikt och påkostade materialval. Stora fönsterpartier suddar ut gränsen mellan ute och inne.",
+facts: {"Byggår": "2021", "Upplåtelseform": "Äganderätt", "Driftkostnad": "3 200 kr/mån", "Energiklass": "B"} }
+
 ];
 
 function renderList() {
-    const container = document.getElementById("propertyList");
+const container = document.getElementById('propertyList');
 
-    properties.forEach(p => {
-        container.innerHTML += `
-        <div class="sf-card p-6 cursor-pointer" onclick="openDetail(${p.id})">
-            <div class="text-sm text-gray-500">${p.area}</div>
-            <div class="text-xl font-bold">${p.address}</div>
-            <div class="mt-2">${p.rooms} • ${p.size}</div>
-            <div class="mt-2 font-bold sf-green">${p.price}</div>
-        </div>`;
-    });
-}
+properties.forEach(p => {
 
-function openDetail(id) {
-    const p = properties.find(x => x.id === id);
+const isClickable = p.clickable;
+const trendColor = p.trend.includes('+')
+? 'text-green-600'
+: p.trend.includes('-')
+? 'text-red-500'
+: 'text-gray-400';
 
-    document.getElementById("listView").classList.add("hidden");
-    document.getElementById("detailView").classList.remove("hidden");
+container.innerHTML += `
+<div ${isClickable ? `onclick="openDetail(${p.id})"` : ''}
+class="sf-card flex flex-col md:flex-row bg-white rounded-lg overflow-hidden ${isClickable ? 'cursor-pointer' : ''}">
 
-    document.getElementById("detailAddress").innerText = p.address;
-    document.getElementById("detailPrice").innerText = p.price;
-    document.getElementById("detailDesc").innerText = p.desc;
+<div class="md:w-[320px] h-[220px] relative shrink-0">
+<img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=600&q=80"
+class="w-full h-full object-cover">
+</div>
+
+<div class="p-8 flex-grow flex flex-col justify-between">
+<div>
+<span class="label-caps">${p.area}</span>
+<h3 class="text-2xl font-extrabold">${p.address}</h3>
+</div>
+</div>
+
+</div>
+`;
+});
+
 }
 
 function showList() {
-    document.getElementById("listView").classList.remove("hidden");
-    document.getElementById("detailView").classList.add("hidden");
+document.getElementById('listView').classList.remove('hidden');
 }
 
 renderList();
+
 </script>
 
 </body>
