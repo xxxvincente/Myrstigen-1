@@ -41,31 +41,20 @@
 </head>
 <body>
 
-   <!-- NAVIGATION -->
+<!-- NAVIGATION / HEADER -->
 <nav class="border-b sticky top-0 bg-white z-[100]">
-<div class="max-w-[1200px] mx-auto px-4 h-20 flex items-center justify-between">
+  <div class="max-w-[1200px] mx-auto px-4 h-20 flex items-center">
 
-<!-- Vänster: ENDAST logga -->
-<div class="cursor-pointer" onclick="showList()">
-<img src="https://fkexternalwebsmediaprod.blob.core.windows.net/cache/4/e/9/b/9/c/4e9b9c318194176dc8cbb37ca7c258393b2d0132.jpg"
-alt="Logga" class="w-[370px] h-[167px]">
-</div>
+    <!-- ENDAST logga -->
+    <img 
+      src="https://fkexternalwebsmediaprod.blob.core.windows.net/cache/4/e/9/b/9/c/4e9b9c318194176dc8cbb37ca7c258393b2d0132.jpg"
+      alt="Logga"
+      class="h-10 object-contain cursor-pointer"
+      onclick="showList()"
+    >
 
-<!-- Mitten: meny -->
-<div class="hidden md:flex space-x-10">
-<a href="#" class="text-[13px] font-bold uppercase tracking-widest hover:text-black">Köpa</a>
-<a href="#" class="text-[13px] font-bold uppercase tracking-widest hover:text-black">Sälja</a>
-<a href="#" class="text-[13px] font-bold uppercase tracking-widest hover:text-black">Värdera</a>
-</div>
-
-<!-- Höger: knapp -->
-<button class="bg-black text-white px-8 py-3 rounded-full text-[12px] font-bold uppercase tracking-wider">
-Logga in
-</button>
-
-</div>
+  </div>
 </nav>
-
     <!-- LISTVY -->
     <div id="listView" class="max-w-[1200px] mx-auto px-4 py-12">
         <div class="mb-10">
