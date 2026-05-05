@@ -203,31 +203,53 @@
     container.innerHTML = ""; // viktigt: annars dupliceras korten
 
     properties.forEach(p => {
-        const isClickable = p.clickable;
-        const trendColor = p.trend.includes('+') 
-            ? 'text-green-600' 
-            : p.trend.includes('-') 
-                ? 'text-red-500' 
-                : 'text-gray-400';
+    const isClickable = p.clickable;
+    const trendColor = p.trend.includes('+') 
+        ? 'text-green-600' 
+        : p.trend.includes('-') 
+            ? 'text-red-500' 
+            : 'text-gray-400';
 
-        container.innerHTML += `
-       <div data-id="${p.id}" class="sf-card bg-white rounded-lg overflow-hidden ${isClickable ? 'cursor-pointer' : ''}">
-            ...
+    container.innerHTML += `
+    <div data-id="${p.id}" class="sf-card bg-white rounded-lg overflow-hidden ${isClickable ? 'cursor-pointer' : ''}">
+
+        <div class="relative h-[220px]">
+            <img src="https://th.bing.com/th/id/OIP.g4NXKr_DvFOp6bmGt0e1owAAAA?w=194&h=291&c=7&r=0&o=5&dpr=1.5&pid=1.7"
+                 class="w-full h-full object-cover">
+
+            <div class="absolute bottom-3 left-3 bg-white px-2 py-1 text-[10px] font-extrabold uppercase tracking-widest">
+                Såld ${p.soldDate}
             </div>
-        `;
-    });
-             // 👇 HÄR LÄGGER DU STEG 2
-    document.querySelectorAll('[data-id]').forEach(card => {
-        card.addEventListener('click', () => {
-            const id = parseInt(card.dataset.id);
-            const p = properties.find(item => item.id === id);
+        </div>
 
-            if (p && p.clickable) {
-                openDetail(id);
-            }
-        });
-    });
-}
+        <div class="p-4">
+            <span class="label-caps">${p.area}</span>
+
+            <h3 class="text-lg font-extrabold mt-1">
+                ${p.address}
+            </h3>
+
+            <p class="text-sm text-gray-500 mt-1">
+                ${p.rooms} • ${p.size}
+            </p>
+
+            <div class="mt-4 flex justify-between items-end">
+                <div>
+                    <p class="label-caps">Slutpris</p>
+                    <p class="text-lg font-extrabold sf-green">
+                        ${p.price}
+                    </p>
+                </div>
+
+                <span class="text-xs font-bold ${trendColor}">
+                    ${p.trend}
+                </span>
+            </div>
+        </div>
+
+    </div>
+    `;
+});
             <!-- Bild -->
             <div class="relative h-[220px]">
                 <img 
