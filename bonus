@@ -1,9 +1,21 @@
- <!-- LISTVY -->
-    <div id="listView" class="max-w-[1200px] mx-auto px-4 py-12">
-        <div class="mb-10">
-            <nav class="breadcrumb-text text-gray-400 mb-4 uppercase">Sverige / Stockholm / Södertälje / Järna</nav>
-            <h1 class="text-[40px] font-extrabold leading-tight tracking-tight">Slutpriser i Järna</h1>
-            <p class="text-gray-500 text-lg mt-2">Här ser du de senaste försäljningarna av villor, lägenheter och radhus.</p>
+ <div class="flex gap-1 h-[400px] md:h-[600px] bg-gray-100 overflow-hidden">
+            <div class="w-full md:w-1/2 h-full">
+                <img id="detailImg1" src="" class="w-full h-full object-cover hover:opacity-95 transition">
+            </div>
+            <div class="hidden md:flex w-1/2 flex-col gap-1">
+                <div class="h-1/2 w-full"><img id="detailImg2" src="" class="w-full h-full object-cover"></div>
+                <div class="h-1/2 w-full relative">
+                    <img id="detailImg3" src="" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-black/20 flex items-center justify-center">
+                        <button class="bg-white text-black px-6 py-2 rounded-full font-bold text-sm">Visa alla bilder</button>
+                    </div>
+                </div>
+            </div>
         </div>
-        
-        <div id="propertyList" class="space-y-5">
+
+        <div class="max-w-[1200px] mx-auto px-4 py-12">
+            <button onclick="showList()" class="flex items-center text-[12px] font-extrabold uppercase tracking-widest mb-10 hover:opacity-60">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="3" d="M15 19l-7-7 7-7"/></svg> Tillbaka till sökresultat
+            </button>
+
+            <div class="flex flex-col lg:flex-row gap-16">
