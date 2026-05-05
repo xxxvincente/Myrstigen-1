@@ -198,41 +198,73 @@
         ];
 
         function renderList() {
-            const container = document.getElementById('propertyList');
-            properties.forEach(p => {
-                const isClickable = p.clickable;
-                const trendColor = p.trend.includes('+') ? 'text-green-600' : p.trend.includes('-') ? 'text-red-500' : 'text-gray-400';
+    const container = document.getElementById('propertyList');
+
+    container.innerHTML = ""; // viktigt: annars dupliceras korten
+
+    properties.forEach(p => {
+        const isClickable = p.clickable;
+        const trendColor = p.trend.includes('+') 
+            ? 'text-green-600' 
+            : p.trend.includes('-') 
+                ? 'text-red-500' 
+                : 'text-gray-400';
+
+        container.innerHTML += `
+        <div ${isClickable ? `onclick="openDetail(${p.id})"` : ''} 
+             class="sf-card bg-white rounded-lg overflow-hidden ${isClickable ? 'cursor-pointer' : ''}">
+
+            <!-- Bild -->
+            <div class="relative h-[220px]">
+                <img 
+                    src="https://th.bing.com/th/id/OIP.g4NXKr_DvFOp6bmGt0e1owAAAA?w=194&h=291&c=7&r=0&o=5&dpr=1.5&pid=1.7"
+                    class="w-full h-full object-cover"
+                >
+
+                <div class="absolute bottom-3 left-3 bg-white px-2 py-1 text-[10px] font-extrabold uppercase tracking-widest">
+                    Såld ${p.soldDate}
+                </div>
+            </div>
+
+            <!-- Text -->
+            <div class="p-4">
                 
-                container.innerHTML += `
-                    <div ${isClickable ? `onclick="openDetail(${p.id})"` : ''} class="sf-card flex flex-col md:flex-row bg-white rounded-lg overflow-hidden ${isClickable ? 'cursor-pointer' : ''}">
-                        <div class="md:w-[320px] h-[220px] relative shrink-0">
-                            <img src="https://th.bing.com/th/id/OIP.g4NXKr_DvFOp6bmGt0e1owAAAA?w=194&h=291&c=7&r=0&o=5&dpr=1.5&pid=1.7" class="w-full h-full object-cover">
-                            <div class="absolute bottom-4 left-4 bg-white px-2 py-1 rounded text-[10px] font-extrabold uppercase tracking-widest">Såld ${p.soldDate}</div>
-                        </div>
-                        <div class="p-8 flex-grow flex flex-col justify-between">
-                            <div>
-                                <div class="flex justify-between items-start">
-                                    <span class="label-caps tracking-widest">${p.area}</span>
-                                    ${p.isVarudeklarerat ? '<span class="bg-[#e6f0ff] text-[#0055ff] text-[9px] font-extrabold px-2 py-1 rounded">VARUDEKLARERAT</span>' : ''}
-                                </div>
-                                <h3 class="text-2xl font-extrabold mt-1 tracking-tight">${p.address}</h3>
-                                <p class="text-gray-500 text-sm mt-1 font-medium">${p.rooms} • ${p.size}</p>
-                            </div>
-                            <div class="mt-4 flex items-end justify-between">
-                                <div>
-                                    <span class="label-caps mb-0.5 block">Slutpris</span>
-                                    <div class="flex items-center">
-                                        <span class="text-2xl font-extrabold sf-green">${p.price}</span>
-                                        <span class="ml-3 text-xs font-bold ${trendColor}">${p.trend}</span>
-                                    </div>
-                                </div>
-                                ${isClickable ? '<div class="text-gray-300 mr-2"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="2" d="M9 5l7 7-7 7"/></svg></div>' : ''}
-                            </div>
-                        </div>
+                <div class="flex justify-between items-start">
+                    <span class="label-caps tracking-widest">${p.area}</span>
+
+                    ${p.isVarudeklarerat ? `
+                        <span class="bg-[#e6f0ff] text-[#0055ff] text-[9px] font-extrabold px-2 py-1 rounded">
+                            VARUDEKLARERAT
+                        </span>
+                    ` : ''}
+                </div>
+
+                <h3 class="text-lg font-extrabold mt-1 tracking-tight">
+                    ${p.address}
+                </h3>
+
+                <p class="text-sm text-gray-500 mt-1 font-medium">
+                    ${p.rooms} • ${p.size}
+                </p>
+
+                <div class="mt-4 flex justify-between items-end">
+                    <div>
+                        <span class="label-caps">Slutpris</span>
+                        <p class="text-lg font-extrabold sf-green">
+                            ${p.price}
+                        </p>
                     </div>
-                `;
-            });
-        }
+
+                    <span class="text-xs font-bold ${trendColor}">
+                        ${p.trend}
+                    </span>
+                </div>
+
+            </div>
+        </div>
+        `;
+    });
+}
 
         function openDetail(id) {
             const p = properties.find(item => item.id === id);
