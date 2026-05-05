@@ -211,9 +211,19 @@
                 : 'text-gray-400';
 
         container.innerHTML += `
-        <div ${isClickable ? `onclick="openDetail(${p.id})"` : ''} 
+       <div data-id="${p.id}" class="sf-card bg-white rounded-lg overflow-hidden ${isClickable ? 'cursor-pointer' : ''}">
              class="sf-card bg-white rounded-lg overflow-hidden ${isClickable ? 'cursor-pointer' : ''}">
+document.querySelectorAll('[data-id]').forEach(card => {
+        card.addEventListener('click', () => {
+            const id = parseInt(card.dataset.id);
+            const p = properties.find(item => item.id === id);
 
+            if (p && p.clickable) {
+                openDetail(id);
+            }
+        });
+    });
+}
             <!-- Bild -->
             <div class="relative h-[220px]">
                 <img 
