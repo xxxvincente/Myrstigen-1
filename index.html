@@ -212,8 +212,12 @@
 
         container.innerHTML += `
        <div data-id="${p.id}" class="sf-card bg-white rounded-lg overflow-hidden ${isClickable ? 'cursor-pointer' : ''}">
-             class="sf-card bg-white rounded-lg overflow-hidden ${isClickable ? 'cursor-pointer' : ''}">
-document.querySelectorAll('[data-id]').forEach(card => {
+            ...
+            </div>
+        `;
+    });
+             // 👇 HÄR LÄGGER DU STEG 2
+    document.querySelectorAll('[data-id]').forEach(card => {
         card.addEventListener('click', () => {
             const id = parseInt(card.dataset.id);
             const p = properties.find(item => item.id === id);
