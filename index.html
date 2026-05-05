@@ -197,7 +197,7 @@
             { id: 10, address: "Rönnvägen 8", area: "Järna Södra", price: "3 950 000 kr", trend: "+3%", rooms: "5 rum", size: "124 m²", lot: "300 m²", soldDate: "2024-01-30", clickable: false }
         ];
 
-     function renderList() {
+    function renderList() {
     const container = document.getElementById('propertyList');
 
     container.innerHTML = "";
@@ -251,7 +251,6 @@
         `;
     });
 
-    // ✅ CLICK FIX (måste ligga EFTER render)
     document.querySelectorAll('[data-id]').forEach(card => {
         card.addEventListener('click', () => {
             const id = parseInt(card.dataset.id);
@@ -263,8 +262,9 @@
         });
     });
 }
+
+renderList();
             <!-- Bild -->
-            <div class="relative h-[220px]">
                 <img 
                     src="https://th.bing.com/th/id/OIP.g4NXKr_DvFOp6bmGt0e1owAAAA?w=194&h=291&c=7&r=0&o=5&dpr=1.5&pid=1.7"
                     class="w-full h-full object-cover"
